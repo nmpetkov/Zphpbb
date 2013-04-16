@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-07 15:39+0000\n"
+"POT-Creation-Date: 2013-04-16 18:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,15 +21,19 @@ msgstr ""
 msgid "Error: Could not obtain config information."
 msgstr ""
 
-#: lib/Zphpbb/Util.php:53 lib/Zphpbb/Util.php:91
+#: lib/Zphpbb/Util.php:53 lib/Zphpbb/Util.php:145
 msgid "Error: Could not obtain user information, Id "
+msgstr ""
+
+#: lib/Zphpbb/Util.php:138
+msgid "Skipped system user, Id "
 msgstr ""
 
 #: lib/Zphpbb/Block/Lastposts.php:26
 msgid "Last forum posts"
 msgstr ""
 
-#: lib/Zphpbb/Block/Lastposts.php:179
+#: lib/Zphpbb/Block/Lastposts.php:136
 msgid "Guest"
 msgstr ""
 
@@ -41,13 +45,17 @@ msgstr ""
 msgid "Displays a list of the latest forum topics."
 msgstr ""
 
-#: lib/Zphpbb/NewsletterPlugin/Zphpbb.php:41
-#: lib/Zphpbb/NewsletterPlugin/Zphpbb.php:72
+#: lib/Zphpbb/NewsletterPlugin/Zphpbb.php:39
+#: lib/Zphpbb/NewsletterPlugin/Zphpbb.php:69
 msgid "Error in plugin"
 msgstr ""
 
 #: lib/Zphpbb/Installer.php:134 lib/Zphpbb/Installer.php:144
 #: lib/Zphpbb/Controller/Admin.php:87 lib/Zphpbb/Controller/Admin.php:98
+#: lib/Zphpbb/Controller/Admin.php:190 lib/Zphpbb/Controller/Admin.php:196
+#: lib/Zphpbb/Controller/Admin.php:208 lib/Zphpbb/Controller/Admin.php:214
+#: lib/Zphpbb/Controller/Admin.php:220 lib/Zphpbb/Controller/Admin.php:299
+#: lib/Zphpbb/Controller/Admin.php:317
 msgid "Error: "
 msgstr ""
 
@@ -93,15 +101,63 @@ msgstr ""
 msgid "Done! Forum cached files are deleted."
 msgstr ""
 
-#: lib/Zphpbb/Controller/Admin.php:209
+#: lib/Zphpbb/Controller/Admin.php:185
+msgid "Importing table "
+msgstr ""
+
+#: lib/Zphpbb/Controller/Admin.php:264
 msgid "Done! Data impoted."
 msgstr ""
 
-#: lib/Zphpbb/Controller/Admin.php:219
+#: lib/Zphpbb/Controller/Admin.php:291
+msgid "in new format"
+msgstr ""
+
+#: lib/Zphpbb/Controller/Admin.php:303
+msgid "found in user "
+msgstr ""
+
+#: lib/Zphpbb/Controller/Admin.php:303
+msgid "avatar type "
+msgstr ""
+
+#: lib/Zphpbb/Controller/Admin.php:309
+msgid "renamed to "
+msgstr ""
+
+#: lib/Zphpbb/Controller/Admin.php:315
+msgid ", database avatar field set to "
+msgstr ""
+
+#: lib/Zphpbb/Controller/Admin.php:320
+msgid "error renaming"
+msgstr ""
+
+#: lib/Zphpbb/Controller/Admin.php:324
+msgid "orphan (not found in users)"
+msgstr ""
+
+#: lib/Zphpbb/Controller/Admin.php:329
+msgid "deleted"
+msgstr ""
+
+#: lib/Zphpbb/Controller/Admin.php:331
+msgid "error deleting"
+msgstr ""
+
+#: lib/Zphpbb/Controller/Admin.php:336
+msgid "File"
+msgstr ""
+
+#: lib/Zphpbb/Controller/Admin.php:339
+msgid "Done! Avatars checked."
+msgstr ""
+
+#: lib/Zphpbb/Controller/Admin.php:349
 msgid "Done! Users accounts updated."
 msgstr ""
 
-#: lib/Zphpbb/Controller/Admin.php:221
+#: lib/Zphpbb/Controller/Admin.php:351
 msgid "Error updating some of accounts."
 msgstr ""
 
@@ -126,13 +182,13 @@ msgid "Delete cache"
 msgstr ""
 
 #: templates/admin/import.tpl:11
-msgid "Import from phpBB 2"
+msgid "Import from phpBB 3.0.11"
 msgstr ""
 
 #: templates/admin/import.tpl:13
 msgid ""
-"Source tables must have structures similar to ZphpBB2 or PNphpBB2. They have "
-"to be in same database."
+"Source tables must have phpBB 3.0.11 structures. If you like to import from "
+"ZphpBB2 or PNphpBB2, please convert them to phpBB, and then use this import."
 msgstr ""
 
 #: templates/admin/import.tpl:18
@@ -146,6 +202,30 @@ msgstr ""
 #: templates/admin/import.tpl:23 templates/admin/modifyconfig.tpl:75
 #: templates/admin/export.tpl:20
 msgid "Cancel"
+msgstr ""
+
+#: templates/admin/import.tpl:32
+msgid "Check uploaded avatars"
+msgstr ""
+
+#: templates/admin/import.tpl:34
+msgid ""
+"Integrates avatars between upload folder and database. To perform check only "
+"leave checkboxes unchecked."
+msgstr ""
+
+#: templates/admin/import.tpl:40
+msgid ""
+"These avatars are imported from phpBB2, but remained with old naming "
+"convention."
+msgstr ""
+
+#: templates/admin/import.tpl:45
+msgid "This avatars are not found in database and are unusable."
+msgstr ""
+
+#: templates/admin/import.tpl:49
+msgid "Perform"
 msgstr ""
 
 #: templates/admin/modifyconfig.tpl:4
@@ -256,35 +336,39 @@ msgid "Number of entries to display"
 msgstr ""
 
 #: templates/blocks/lastposts_modify.tpl:18
-msgid "Display Date"
+msgid "Number of characters to display from text"
 msgstr ""
 
 #: templates/blocks/lastposts_modify.tpl:22
-msgid "Display Time"
+msgid "Display Date"
 msgstr ""
 
 #: templates/blocks/lastposts_modify.tpl:26
-msgid "Show only the last post of every topic"
+msgid "Display Time"
 msgstr ""
 
 #: templates/blocks/lastposts_modify.tpl:30
+msgid "Show only the last post of every topic"
+msgstr ""
+
+#: templates/blocks/lastposts_modify.tpl:34
 msgid ""
 "Do not show posts of the following forums (CTRL+LEFT CLICK sets/clears "
 "selections)"
 msgstr ""
 
-#: templates/blocks/lastposts.tpl:4 templates/blocks/lastposts.tpl:5
+#: templates/blocks/lastposts.tpl:5 templates/blocks/lastposts.tpl:6
 msgid "Goto post"
 msgstr ""
 
-#: templates/blocks/lastposts.tpl:8
+#: templates/blocks/lastposts.tpl:9
 msgid "by"
 msgstr ""
 
-#: templates/blocks/lastposts.tpl:12
+#: templates/blocks/lastposts.tpl:13
 msgid "on"
 msgstr ""
 
-#: templates/blocks/lastposts.tpl:15
+#: templates/blocks/lastposts.tpl:16
 msgid "at"
 msgstr ""
