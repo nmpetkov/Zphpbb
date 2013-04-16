@@ -1,0 +1,60 @@
+UPGRADE INSTRUCTION FROM ZphpBB2, PNphpBB2
+
+Note: presumption is that you have ZphpBB2 or PNphpBB2 module, with table prefix phpbb2_, 
+and also you will install Zphpbb module with table prefix phpbb_. 
+
+1. Download from www.phpbb.com phpBB version 3.0.11
+2. Copy dearchivated package to directory modules/Zphpbb/vendor/phpbb/
+3. Temporary allow access in .htaccess file in this folder, adding lines in the beginning of the file:
+<Files *>
+Order deny,allow
+Allow from all
+</Files>
+4. Point with the browser to modules/Zphpbb/vendor/phpbb/install/ directory, and install phpBB. When installing:
+    - Enter table prefix phpbb3_, to be clear and distinguish.
+    - Provide same database parameters (install in same Zikula database, as main site).
+    - Make sure for administrator to provide unique username, not one existing in your main site.
+    - At final install page press proposed option to convert.
+5. When converting - provide proper information (table prefix, directory paths).
+    - Databese information - same as for the main site
+    - Prefix for old forum, for example phpbb2_, or see with phpMyAdmin (or preferred tool) current prefix for old forum. 
+    If upgrade is from ZphpBB2, then you can go to ZphpBB2 admin page and change the prefix.
+    - Path for old forum, enter ../../../ZphpBB2/vendor/phpBB2 or see where is old phpBB2 directory, relative to install folder.
+    - Make sure this directory is accessible. Place .htaccess file with content:
+    <Files *>
+    Order deny,allow
+    Allow from all
+    </Files>
+    - Follow conversion steps one by one.
+    - Make sure conversion is successful.
+6. Rename modules/Zphpbb/vendor/phpbb folder to modules/Zphpbb/vendor/phpbb3 (don't delete this folder at this point).
+7. Default "Module URL" for Zphpbb is "forum". Same is for ZphpBB2, and it is possible for other modules. 
+    Please consider to rename module URL for them, for example to "forum2" or "forumold".
+8. Copy Zphpbb module files and:
+    - Install the module.
+    - After module is installed, please delete folder:
+    modules/Zphpbb/vendor/phpbb/install
+    otherwise your forums can't be accessed.
+9. Go to module admin page, import. Do the import.
+10. If you like to see all attached (uploaded) files in the forum, copy all files from:
+    modules/ZphpBB2/vendor/phpBB2/files (or where they are located)
+    to:
+    modules/Zphpbb/vendor/phpbb/files
+11. Some smileys exist in old directory and are missing in new one. So copy them from:
+    modules/ZphpBB2/vendor/phpBB2/images/smilies
+    to:
+    modules/Zphpbb/vendor/phpbb/images/smilies
+12. To see uploaded avatars from users:
+    - Copy them from:
+    modules/ZphpBB2/vendor/phpBB2/images/avatars/upload (or from main site images/avatars/upload if they are there)
+    to:
+    modules/Zphpbb/vendor/phpbb/images/avatars/upload
+    - Go to Zphpbb admin panel, import and perform "Check avatars".
+13. Check all is OK with new module Zphpbb.
+    - If guests can't see forums, go to phpbb admin panel, forum permissions, and give them read rights.
+14. Delete subsidiary phpBB instalation:
+    - Delete folder modules/Zphpbb/vendor/phpbb folder to modules/Zphpbb/vendor/phpbb3.
+    - With phpMyAdmin (or preferred tool) delete all tables with prefix phpbb3_.
+15. Uninstall and delete old module.
+16. Change links to new forum, {Zphpbb}.
+17. You are done! 

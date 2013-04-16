@@ -1,0 +1,6 @@
+Based on phpBB 3.0.11
+
+Instructions to upgrade
+1. Download from https://www.phpbb.com/
+2. Apply Gravatar mod (here is Gravatar Integration version 1.0.0). SQL changes insert in install/schemas/schema_data.sql.
+3. Search for marked with Zphpbb in comments changes, and apply in the new version.

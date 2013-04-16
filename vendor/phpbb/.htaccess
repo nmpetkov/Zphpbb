@@ -1,0 +1,16 @@
+# Zphpbb: allow access if parent dir is disallowed
+<Files *>
+Order deny,allow
+Allow from all
+</Files>
+
+# from phpbb
+<Files "config.php">
+Order Allow,Deny
+Deny from All
+</Files>
+
+<Files "common.php">
+Order Allow,Deny
+Deny from All
+</Files>

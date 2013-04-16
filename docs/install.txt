@@ -1,0 +1,32 @@
+INSTALL
+
+1. Install as any other Zikula module (copy Zphpbb directory to modules directory, go to Admin panel, Extensions and install).
+2. Delete directory Zphpbb/vendor/phpbb/install. Keep in mind, that if need to convert/import/export data, you have to copy this directory again in this place.
+3. If you like, prepare site logo in a file named site_logo.gif, and copy in proper style directory:
+    Zphpbb/vendor/phpbb/styles/subsilver2/imageset/site_logo.gif
+    Zphpbb/vendor/phpbb/styles/subsilver2/imageset/site_logo.gif
+This affects maximized forum view only. Module install script will try to copy your site logo, if it is in Zikula_root_dir/images/logo.gif.
+4. Main forum page is displayed placing {Zphpbb} in the menu block, or as normally with user main module function. Check how installed forum looks like.
+5. Go to module admin panel and make appropriate settings. Here you will find various possibilities to import data.
+6. Try out special module theme prosilver_z, which is based on default phpBB prosilver theme.
+6. If you like this module to be supported better, please donate in project page.
+
+Have fun!
+
+UPGRADE FROM ZphpBB2
+
+Upgrade is possible as any other upgrade in Zikula extensions.
+Upgrade from PNphpBB2 is not supported. first upgrade to ZphpBB2 to be performed.
+
+DIFFERENCES FROM ORIGINAL phpBB
+
+1. Avatars. Directory for avatars is not in "...forum directory.../images/avatar", but in 
+    "...Zikula root directory.../images/avatar"
+    Please manually move respective images/folders.
+    The presumption is to make installation directory clean from any uploads/runtime changes
+2 Please check avatars and file (attachments) directories - they have to be created at respective places.
+    Move there files if any.
+
+CUSTOMIZE
+
+Further adjustments in module settings.
