@@ -235,11 +235,16 @@ class Zphpbb_Listener_UsersSynch
             if (isset($userObj['__ATTRIBUTES__']['tzoffset'])) {
                 $sql .= "user_timezone = '" . DataUtil::formatForStore($userObj['__ATTRIBUTES__']['tzoffset']) . "', ";
             }
-            // Avatars are not synchronized yet
-            /*if (isset($userObj['__ATTRIBUTES__']['avatar'])) {
-                $sql .= "user_avatar = '" . DataUtil::formatForStore($userObj['__ATTRIBUTES__']['avatar']) . "', ";
-                $sql .= "user_avatar_type = 3, ";
-            }*/
+            if (isset($userObj['__ATTRIBUTES__']['avatar'])) {
+                if ($userObj['__ATTRIBUTES__']['avatar'] == 'gravatar.gif') { // zikula: smarty_function_useravatar
+                    // Avatars are synchronized - gravatars only$size
+                    $size = 80; // Hieght and width, Gravatars are square. 80 is Gravatar default
+                    $sql .= "user_avatar = '" . DataUtil::formatForStore('http://www.gravatar.com/avatar/' . md5($userObj['email']) . '.jpg?s=' . $size) . "', "; // According to the specifications here: http://en.gravatar.com/site/implement/url. We are also forcing it to be .jpg for cleanliness
+                    $sql .= "user_avatar_type = 4, ";
+                    $sql .= "user_avatar_width = ".$size.", ";
+                    $sql .= "user_avatar_height = ".$size.", ";
+                }
+            }
             $sql = rtrim($sql, ' ,');
             $sql .= " WHERE user_id=" . $userObj['uid'];
             $stmt = $connection->prepare($sql);
