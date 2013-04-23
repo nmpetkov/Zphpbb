@@ -87,6 +87,7 @@ class Zphpbb_Installer extends Zikula_AbstractInstaller
         $this->setVar('display_rightsadmins', '1');
         $this->setVar('display_phpbbfooter', '1');
         $this->setVar('login_usezikula', '1');
+        $this->setVar('display_zichatlink', '');
 
         // Register hooks
         HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());

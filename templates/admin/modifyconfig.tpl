@@ -27,6 +27,10 @@
             <label for="display_rightsadmins">{gt text='Display user rights section and team link'}</label>
             <input type="checkbox" value='1' id="display_rightsadmins" name="display_rightsadmins"{if $display_rightsadmins eq '1'} checked="checked"{/if}/>
         </div>
+        <div class="z-formrow">
+            <label for="display_zichatlink">{gt text='Display Zichat link'}</label>
+            <input type="checkbox" value='1' id="display_zichatlink" name="display_zichatlink"{if $display_zichatlink eq '1'} checked="checked"{/if}/>
+        </div>
     </fieldset>
     <fieldset>
         <legend>{gt text='Permissions'}</legend>

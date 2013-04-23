@@ -4605,7 +4605,9 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'U_MAINSITE'		    => zikula_siteurl(),
 		'DISPLAY_FOOTER'		=> zikula_zphpbb_getvar('display_phpbbfooter'),
 		'DISPLAY_RIGHTSADMINS'	=> zikula_zphpbb_getvar('display_rightsadmins'),
-		'LOGIN_USEZIKULA'	=> zikula_zphpbb_getvar('login_usezikula'),
+		'LOGIN_USEZIKULA'	    => zikula_zphpbb_getvar('login_usezikula'),
+		'DISPLAY_ZICHATLINK'	=> zikula_zphpbb_getvar('display_zichatlink'),
+		'U_ZICHAT'              => zikula_url('Zichat', 'user', 'main', null, null, null, true),
         // Zphpbb <
 		'U_PROFILE'				=> append_sid("{$phpbb_root_path}ucp.$phpEx"),
 		'U_MODCP'				=> append_sid("{$phpbb_root_path}mcp.$phpEx", false, true, $user->session_id),

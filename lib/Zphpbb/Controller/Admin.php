@@ -70,6 +70,7 @@ class Zphpbb_Controller_Admin extends Zikula_AbstractController
         $modvars['login_usezikula'] = FormUtil::getPassedValue('login_usezikula', '', 'POST');
         $modvars['display_rightsadmins'] = FormUtil::getPassedValue('display_rightsadmins', '', 'POST');
         $modvars['display_phpbbfooter'] = FormUtil::getPassedValue('display_phpbbfooter', '', 'POST');
+        $modvars['display_zichatlink'] = FormUtil::getPassedValue('display_zichatlink', '', 'POST');
 
         // table prefix change
         if ($vars['table_prefix'] && $vars['table_prefix']<>$modvars['table_prefix']) {

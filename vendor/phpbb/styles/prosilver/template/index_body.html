@@ -45,7 +45,8 @@
 	<p><!-- IF BIRTHDAY_LIST -->{L_CONGRATULATIONS}: <strong>{BIRTHDAY_LIST}</strong><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF --></p>
 <!-- ENDIF -->
 
-<!-- IF NEWEST_USER -->
+<!-- IF 0 --><!-- Zphpbb > added S_DISPLAY_ONLINE_LIST - to hide stats if online is hidden --><!-- ENDIF -->
+<!-- IF NEWEST_USER and S_DISPLAY_ONLINE_LIST -->
 	<h3>{L_STATISTICS}</h3>
 	<p>{TOTAL_POSTS} &bull; {TOTAL_TOPICS} &bull; {TOTAL_USERS} &bull; {NEWEST_USER}</p>
 <!-- ENDIF -->
