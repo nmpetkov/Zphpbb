@@ -13,20 +13,6 @@ This affects maximized forum view only. Module install script will try to copy y
 
 Have fun!
 
-UPGRADE FROM ZphpBB2
-
-Upgrade is possible as any other upgrade in Zikula extensions.
-Upgrade from PNphpBB2 is not supported. first upgrade to ZphpBB2 to be performed.
-
-DIFFERENCES FROM ORIGINAL phpBB
-
-1. Avatars. Directory for avatars is not in "...forum directory.../images/avatar", but in 
-    "...Zikula root directory.../images/avatar"
-    Please manually move respective images/folders.
-    The presumption is to make installation directory clean from any uploads/runtime changes
-2 Please check avatars and file (attachments) directories - they have to be created at respective places.
-    Move there files if any.
-
 CUSTOMIZE
 
 Further adjustments in module settings.
