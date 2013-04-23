@@ -9,7 +9,9 @@ This affects maximized forum view only. Module install script will try to copy y
 4. Main forum page is displayed placing {Zphpbb} in the menu block, or as normally with user main module function. Check how installed forum looks like.
 5. Go to module admin panel and make appropriate settings. Here you will find various possibilities to import data.
 6. Try out special module theme prosilver_z, which is based on default phpBB prosilver theme.
-6. If you like this module to be supported better, please donate in project page.
+7. To install other languages, please download them from phpBB web site, and upload in module vendor directory.
+
+If you like this module to be supported in the future, please donate in project page.
 
 Have fun!
 
