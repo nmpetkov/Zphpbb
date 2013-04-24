@@ -6,7 +6,8 @@ Note: presumption is that you have ZphpBB2 or PNphpBB2 module, with table prefix
 and also you will install Zphpbb module with table prefix phpbb_. 
 
 1. Download from www.phpbb.com phpBB version 3.0.11
-2. Copy dearchivated package to directory modules/Zphpbb/vendor/phpbb/
+2. Copy dearchivated package to directory modules/Zphpbb/vendor/phpbb/. 
+    You have to manually create this directory, as Zphpbb module is NOT yet installed!
 3. Temporary allow access in .htaccess file in this folder, adding lines in the beginning of the file:
 <Files *>
 Order deny,allow
