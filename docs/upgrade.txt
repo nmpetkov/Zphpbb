@@ -33,6 +33,7 @@ Allow from all
 6. Rename modules/Zphpbb/vendor/phpbb folder to modules/Zphpbb/vendor/phpbb3 (don't delete this folder at this point).
 7. Default "Module URL" for Zphpbb is "forum". Same is for ZphpBB2, and it is possible for other modules. 
     Please consider to rename module URL for them, for example to "forum2" or "forumold".
+    (Go to Extensions, row with ZphpBB2 module, to the right press edit button, and there is a field "Module URL".)
 8. Copy Zphpbb module files and:
     - Install the module.
     - After module is installed, please delete folder:
