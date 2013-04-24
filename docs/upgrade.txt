@@ -1,5 +1,7 @@
 UPGRADE INSTRUCTION FROM ZphpBB2, PNphpBB2
 
+The upgrade process simply upgrades your forum to phpBB3, and then imports respective tables or data into new Zphpbb installation.
+
 Note: presumption is that you have ZphpBB2 or PNphpBB2 module, with table prefix phpbb2_, 
 and also you will install Zphpbb module with table prefix phpbb_. 
 
