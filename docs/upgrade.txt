@@ -55,7 +55,7 @@ Allow from all
 13. Check all is OK with new module Zphpbb.
     - If guests can't see forums, go to phpbb admin panel, forum permissions, and give them read rights.
 14. Delete subsidiary phpBB instalation:
-    - Delete folder modules/Zphpbb/vendor/phpbb folder to modules/Zphpbb/vendor/phpbb3.
+    - Delete folder modules/Zphpbb/vendor/phpbb3.
     - With phpMyAdmin (or preferred tool) delete all tables with prefix phpbb3_.
 15. Uninstall and delete old module.
 16. Change links to new forum, {Zphpbb}.
