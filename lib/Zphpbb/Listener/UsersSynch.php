@@ -263,7 +263,7 @@ class Zphpbb_Listener_UsersSynch
         return false;
     }
 
-    function user_group_member($user_id, $group_id, $deleteMember = false)
+    static function user_group_member($user_id, $group_id, $deleteMember = false)
     {
         // Check for existing row
         $connection = Doctrine_Manager::getInstance()->getCurrentConnection();
@@ -284,7 +284,7 @@ class Zphpbb_Listener_UsersSynch
         return true;
     }
 
-    function phpbb_email_hash($email)
+    static function phpbb_email_hash($email)
     {
         return sprintf('%u', crc32(strtolower($email))) . strlen($email);
     }

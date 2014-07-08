@@ -40,9 +40,13 @@ class Zphpbb_Controller_Admin extends Zikula_AbstractController
         }
 
         // get all groups
-        $groups = UserUtil::getGroups('', 'ORDER BY gid');
+        if (Zikula_Core::VERSION_NUM < '1.4.0') {
+            $groups = UserUtil::getGroups('', 'ORDER BY gid');
+        } else {
+            $groups = UserUtil::getGroups(array(), array('gid' => 'ASC'));
+        }
         // count groups
-        $groups[count] = count($groups, 0);
+        $groups['count'] = count($groups, 0);
 
         $this->view->setCaching(false);
         $this->view->assign($vars);

@@ -4,7 +4,7 @@
         {assign var='postid' value='#p'|cat:$item.post_id}
         <a class="z-normal" href="{modurl modname='Zphpbb' type='user' func='viewtopic' t=$item.topic_id|cat:$postid}" title="{gt text='Goto post'}">
         <img style="display:inline;" src="{$item.replyicon}" alt="{gt text='Goto post'}" />
-        {$item.topic_title|strip_tags:false|truncate:60|safetext}
+        {$item.topic_title|strip_tags:false|truncate:65|safehtml}
         <br />
         {gt text='by'} {$item.post_username|safetext}
         {* &nbsp;({$item.post_replies}) *}
