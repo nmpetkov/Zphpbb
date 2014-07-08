@@ -253,8 +253,10 @@ class Ztools
         $urlargs = "module=".$modname."&type=".$type."&func=".$func;
         $url = $entrypoint.'?'.$urlargs;
         // Parameters
-        foreach ($args as $key => $value) {
-            $url .= '&'.$key.'='.$value;
+        if (is_array($args)) {
+            foreach ($args as $key => $value) {
+                $url .= '&'.$key.'='.$value;
+            }
         }
         if (isset($fragment)) {
             $url .= '#' . $fragment;
