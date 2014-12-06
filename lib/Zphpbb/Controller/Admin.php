@@ -81,7 +81,7 @@ class Zphpbb_Controller_Admin extends Zikula_AbstractController
             // table prefix is changed
             $mandatoryinprefix = 'phpbb';
             if (strpos($modvars['table_prefix'], $mandatoryinprefix) === false) {
-                return LogUtil::registerError($this->__('Error: table prefix must contain fragment <b>phpbb</b>.'));
+                return LogUtil::registerError($this->__('Error: table prefix must contain fragment') . ' <b>'.$mandatoryinprefix.'</b>.');
             }
             // ok, let's change in db
             $connection = Doctrine_Manager::getInstance()->getCurrentConnection();

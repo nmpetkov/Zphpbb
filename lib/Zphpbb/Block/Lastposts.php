@@ -45,6 +45,8 @@ class Zphpbb_Block_Lastposts extends Zikula_Controller_AbstractBlock
         // Get variables from content block
         $vars = BlockUtil::varsFromContent($blockinfo['content']);
 
+        $blockinfo['content'] = "";
+
         // Implementation cached content
         $enable_cache = true;
         $write_to_cache = false;	# flag
@@ -79,8 +81,6 @@ class Zphpbb_Block_Lastposts extends Zikula_Controller_AbstractBlock
             define('IN_PHPBB', true);
             $phpbb_root_path = 'modules/Zphpbb/vendor/phpbb/';
             include_once($phpbb_root_path . "includes/constants.php");
-
-            $blockinfo['content'] = "";
 
             $vars['last_X_posts'] = $vars['last_X_posts'] ? $vars['last_X_posts'] : "5"; // defaults to some items if empty
             $excluded_forums = '';
@@ -123,7 +123,6 @@ class Zphpbb_Block_Lastposts extends Zikula_Controller_AbstractBlock
             $stmt->execute();
             $items = $stmt->fetchAll(Doctrine_Core::FETCH_ASSOC);
             if (!$items) {
-                $blockinfo['content'] = '';
                 return BlockUtil::themesideblock($blockinfo);
             }
 
@@ -140,15 +139,13 @@ class Zphpbb_Block_Lastposts extends Zikula_Controller_AbstractBlock
 
         $render_template = 'blocks/lastposts.tpl';
         if ($this->view->is_cached($render_template)) {
-            $blockinfo['content'] = $this->view->fetch($render_template);
+            $content = $this->view->fetch($render_template);
         } else {
             $this->view->assign($vars);
             $this->view->assign('items', $items);
             $this->view->assign('phpbb_root_path', $phpbb_root_path);
-            $blockinfo['content'] = $this->view->fetch($render_template);
+            $content = $this->view->fetch($render_template);
         }
-        
-        $content = BlockUtil::themesideblock($blockinfo);
 
         if ($write_to_cache and !empty($content)) {
            // attempt to write to cache if not loaded before
@@ -159,7 +156,14 @@ class Zphpbb_Block_Lastposts extends Zikula_Controller_AbstractBlock
                 //echo "<br />Could not save data to cache. Please make sure your cache directory exists and is writable.<br />";
             }
         }
-        return $content;
+
+        $lang = ZLanguage::getLanguageCode();
+        if (isset($vars['blocktitle_' . $lang]) && !empty($vars['blocktitle_' . $lang])) {
+            $blockinfo['title'] = $vars['blocktitle_' . $lang];
+        }
+		$blockinfo['content'] = $content;
+
+        return BlockUtil::themeBlock($blockinfo);
     }
     
     /**
@@ -167,6 +171,8 @@ class Zphpbb_Block_Lastposts extends Zikula_Controller_AbstractBlock
      */
     public function modify($blockinfo)
     {
+        $languages = ZLanguage::getInstalledLanguages();
+
         $table_prefix = ModUtil::getVar ('Zphpbb', 'table_prefix', 'phpbb_');
 
         // get module information
@@ -185,6 +191,12 @@ class Zphpbb_Block_Lastposts extends Zikula_Controller_AbstractBlock
         if (!is_array($vars['excluded_forums'])) {
             $vars['excluded_forums'] = array();
         }
+        foreach ($languages as $langcode) {
+            // Multilingual title of the block
+            if (!isset($vars['blocktitle_' . $langcode])) {
+                $vars['blocktitle_' . $langcode] = $blockinfo['title'];
+            }
+        }
 
         // Create forum list
         $connection = Doctrine_Manager::getInstance()->getCurrentConnection();
@@ -196,7 +208,8 @@ class Zphpbb_Block_Lastposts extends Zikula_Controller_AbstractBlock
             $forums[] = array('id' => $item['forum_id'], 'name' => $item['cat_title'] . ' / ' . $item['forum_name'], 'selected' => $selected);
         }
 
-        $this->view->assign($vars);
+        $this->view->assign('vars', $vars);
+        $this->view->assign('languages', $languages);
         $this->view->assign('forums', $forums);
 
         return $this->view->fetch('blocks/lastposts_modify.tpl');
@@ -207,6 +220,8 @@ class Zphpbb_Block_Lastposts extends Zikula_Controller_AbstractBlock
      */
     public function update($blockinfo)
     {
+        $languages = ZLanguage::getInstalledLanguages();
+
         $vars = BlockUtil::varsFromContent($blockinfo['content']);
 
         $this->view->setCaching(Zikula_View::CACHE_DISABLED);
@@ -220,6 +235,10 @@ class Zphpbb_Block_Lastposts extends Zikula_Controller_AbstractBlock
         $vars['group_topics'] = (bool)FormUtil::getPassedValue('group_topics', false, 'POST');
         $vars['excluded_forums'] = FormUtil::getPassedValue('excluded_forums', null, 'POST');
         $vars['display_text_chars'] = (int)FormUtil::getPassedValue('display_text_chars', 0, 'POST');
+        foreach ($languages as $langcode) {
+            // Multilingual title of the block
+            $vars['blocktitle_' . $langcode] = htmlspecialchars_decode(FormUtil::getPassedValue('blocktitle_' . $langcode));
+        }
 
         // write back the new contents
         $blockinfo['content'] = BlockUtil::varsToContent($vars);

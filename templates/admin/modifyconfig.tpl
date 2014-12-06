@@ -11,7 +11,7 @@
         <legend>{gt text='General settings'}</legend>
         <div class="z-formrow">
             <label for="table_prefix">{gt text='Table prefix'}</label>
-            <input id="table_prefix" type="text" name="table_prefix" size="3" value="{$table_prefix|safetext}" />
+            <input id="table_prefix" type="text" name="table_prefix" value="{$table_prefix|safetext}" />
             <em class="z-sub z-formnote">{gt text='This will change module table prefix in database. Must contain <b>phpbb</b>.'}</em>
         </div>
         <div class="z-formrow">
