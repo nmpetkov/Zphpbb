@@ -110,13 +110,13 @@ class Ztools
     public static function mysqlConnect()
     {
         self::$dbname = self::$ZConfig['DBInfo']['databases']['default']['dbname'];
-        self::$dblink = mysql_connect(self::$ZConfig['DBInfo']['databases']['default']['host'], self::$ZConfig['DBInfo']['databases']['default']['user'], self::$ZConfig['DBInfo']['databases']['default']['password']);
+        self::$dblink = mysqli_connect(self::$ZConfig['DBInfo']['databases']['default']['host'], self::$ZConfig['DBInfo']['databases']['default']['user'], self::$ZConfig['DBInfo']['databases']['default']['password']);
         if (self::$dblink) {
-            if (!mysql_select_db(self::$dbname)) {
+            if (!mysqli_select_db(self::$dblink, self::$dbname)) {
                 echo 'Can not select database';
             }
         } else {
-            echo 'Can not connect to MySql server';
+            echo 'Can not connect to MySql server. Please check PHP version to find if supports mysqli_* functions.';
         }
 
         return self::$dblink;
@@ -142,7 +142,7 @@ class Ztools
      *
      * @param string  $sql
      *
-     * @return MySQL resource or boolean (mysql_query)
+     * @return MySQL resource or boolean
      */
     public static function MysqlQuery($sql)
     {
@@ -150,7 +150,7 @@ class Ztools
             self::mysqlConnect();
         }
         if (self::$dblink) {
-            $rSet = mysql_query($sql, self::$dblink) or die("Bad query: ".$sql);
+            $rSet = mysqli_query(self::$dblink, $sql) or die("Bad query: ".$sql);
         }
 
         return $rSet;
@@ -167,7 +167,7 @@ class Ztools
     {
         $rSet = self::MysqlQuery($sql);
         if ($rSet) {
-            return mysql_fetch_array($rSet, MYSQL_ASSOC);
+            return mysqli_fetch_array($rSet, MYSQLI_ASSOC);
         }
 
         return false;
@@ -182,22 +182,16 @@ class Ztools
      */
     public static function ZikulaModuleVars($modname)
     {
-        if (array_key_exists($modname, self::$modvars)) {
-            // variables are cached, use them
-            $vars = self::$modvars[$modname];
-        } else {
-            $sql = 'SELECT * FROM `module_vars` WHERE `modname`="'.$modname.'"';
-            $rSet = self::MysqlQuery($sql);
-            $vars = array();
-            while ($var = mysql_fetch_array($rSet)){
-                $vars[$var['name']] = unserialize($var['value']);
-            }
-            // cache module variables for subsequent usage
-            self::$modvars[$modname] = $vars;
+        $sql = 'SELECT * FROM `module_vars` WHERE `modname`="'.$modname.'"';
+        $rSet = self::MysqlQuery($sql);
+        $vars = array();
+        while ($var = mysqli_fetch_array($rSet)){
+            $vars[$var['name']] = unserialize($var['value']);
         }
 
         return $vars;
     }
+
 
     /**
      * Zikula module variable.
@@ -212,7 +206,7 @@ class Ztools
         if (array_key_exists($modname, self::$modvars)) {
             // variables are cached, use them
         } else {
-            ZikulaModuleVars($modname);
+            self::ZikulaModuleVars($modname);
         }
         $var = self::$modvars[$modname][$varname];
 
@@ -299,7 +293,7 @@ class Ztools
         $sql = 'SELECT * FROM `modules` WHERE LOWER(`name`)="'.strtolower($modname).'"';
         $rSet = self::MysqlQuery($sql);
         if ($rSet) {
-            $modinfo = mysql_fetch_assoc($rSet);
+            $modinfo = mysqli_fetch_assoc($rSet);
         }
 
         return $modinfo;
@@ -395,7 +389,7 @@ class Ztools
 
         $rSet = self::MysqlQuery($sql);
         self::$userattrib = array();
-        while ($row = mysql_fetch_assoc($rSet)){
+        while ($row = mysqli_fetch_assoc($rSet)){
             self::$userattrib[$row['attribute_name']] = $row['value'];
         }
 
@@ -423,7 +417,7 @@ class Ztools
         if ($userid > 0) {
             $sql = 'SELECT * FROM `group_membership` WHERE `uid`='.$userid;
             $rSet = self::MysqlQuery($sql);
-            while ($r = mysql_fetch_object($rSet)){
+            while ($r = mysqli_fetch_object($rSet)){
                 $usergroupids[] = $r->gid;
             }
         }
@@ -443,7 +437,7 @@ class Ztools
         $sql = 'SELECT * FROM `groups` ORDER BY `gid` ASC';
         $rSet = self::MysqlQuery($sql);
         $groups = array();
-        while ($groupdata = mysql_fetch_array($rSet)){
+        while ($groupdata = mysqli_fetch_array($rSet)){
             $groups[] = $groupdata;
         }
 
