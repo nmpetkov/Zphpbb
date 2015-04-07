@@ -199,7 +199,7 @@ class Ztools
      * @param string  $modname
      * @param string  $varname
      *
-     * @return array with Zikula module variables
+     * @return module variables value
      */
     public static function ZikulaModuleVar($modname, $varname)
     {
@@ -208,7 +208,11 @@ class Ztools
         } else {
             self::ZikulaModuleVars($modname);
         }
-        $var = self::$modvars[$modname][$varname];
+        if (isset(self::$modvars[$modname][$varname])) {
+            $var = self::$modvars[$modname][$varname];
+        } else {
+            $var = false;
+        }
 
         return $var;
     }
@@ -257,8 +261,7 @@ class Ztools
         }
         // Only produce full URL when HTTPS is on or $ssl is set (from Zikula ModUtil class)
         $siteRoot = '';
-        $https = $_SERVER['HTTPS'];
-        if ((isset($https) && $https == 'on') || $ssl != null || $fqurl == true) {
+        if ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || $ssl != null || $fqurl == true) {
             $siteRoot = self::ZikulaSiteRootUrl($ssl);
         }
 
@@ -272,8 +275,7 @@ class Ztools
      */
     public static function ZikulaSiteRootUrl($ssl = null)
     {
-        $https = $_SERVER['HTTPS'];
-        $protocol = 'http' . (($https == 'on' && $ssl !== false) || $ssl === true ? 's' : '');
+        $protocol = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && $ssl !== false) || $ssl === true ? 's' : '');
         $host = $_SERVER['HTTP_HOST'];
         $baseuri = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/'));
         return $protocol . '://' . $host . $baseuri . '/';
