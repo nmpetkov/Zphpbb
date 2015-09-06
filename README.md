@@ -4,6 +4,7 @@ Zphpbb
 Zphpbb is Zikula module, forum solution based on phpBB.
 
 Minimum version required for module to work is Zikula 1.3.5. It could work in previous versions, but is not tested.
+It is also tested to work in Zikula 1.4.0.
 
 Development: Module is in production stage. Can be used to install or upgrade.
 Download as zip file current files. It ensures you receive version with last bug fixed.
@@ -11,7 +12,7 @@ Download as zip file current files. It ensures you receive version with last bug
 ## Vendor
 
 ### phpBB
-This module is based on phpBB, http://www.phpbb.com/. Current version (3.0.11).
+This module is based on phpBB, http://www.phpbb.com/, version 3.0.11. Version 3.1 is not supported yet!
 
 ## Installation
 
